@@ -23,6 +23,18 @@ class PetsList(ListView):
         return HttpResponseRedirect(reverse_lazy('home'))
     return render(request, 'pets-list.html', {'form': form})
 
+class AppointmentList(ListView):
+  def get(self, request, *args, **kwargs):
+      context = {'appointments': Appointment.objects.order_by('date_of_appointment')}
+      return render(request, 'appointment-list.html', context)
+
+  # def post(self, request, *args, **kwargs):
+  #   form = PetForm(request.POST)
+  #   if form.is_valid():
+  #       article = form.save()
+  #       return HttpResponseRedirect(reverse_lazy('home'))
+  #   return render(request, 'pets-list.html', {'form': form})
+
 
 class HomePage(CreateView):
     def get(self, request):

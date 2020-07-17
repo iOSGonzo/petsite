@@ -1,0 +1,14 @@
+{% block content %}
+{% if user.is_authenticated %}
+
+  <h1>Upcoming Appointments</h1>
+  <ul>
+    {% for appointment in appointments %}
+      <li>
+        <a>{{ appointment.date_of_appointment }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endif %}
+{% endblock %}
