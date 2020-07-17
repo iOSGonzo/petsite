@@ -7,7 +7,7 @@ urlpatterns = [
     # path('pets/', views.pets_list, name='pets-list'),
     path('pets/<int:pet_id>/', PetDetail.as_view(), name='detail'),
     path('pets/', PetsList.as_view(), name='pets-list'),
-    path('appointments/', AppointmentList.as_view(), name='appointment-list')
+    path('calendar/', AppointmentList.as_view(), name='calendar')
     # path('w/<str:slug>/', ArticleDetailView.as_view(), name='wiki-details-page'),
     # path('create/', ArticleCreateView.as_view(), name='create'),
 ]

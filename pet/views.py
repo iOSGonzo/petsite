@@ -8,8 +8,8 @@ from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 
-from pet.forms import PetForm
-from pet.models import Pet
+from pet.forms import PetForm, AppointmentForm
+from pet.models import Pet, Appointment
 
 class PetsList(ListView):
   def get(self, request, *args, **kwargs):
@@ -25,15 +25,18 @@ class PetsList(ListView):
 
 class AppointmentList(ListView):
   def get(self, request, *args, **kwargs):
-      context = {'appointments': Appointment.objects.order_by('date_of_appointment')}
-      return render(request, 'appointment-list.html', context)
+      context = {
+            'appointments': Appointment.objects.order_by('date_of_appointment'),
+            'form': AppointmentForm()
+      }
+      return render(request, 'calendar.html', context)
 
-  # def post(self, request, *args, **kwargs):
-  #   form = PetForm(request.POST)
-  #   if form.is_valid():
-  #       article = form.save()
-  #       return HttpResponseRedirect(reverse_lazy('home'))
-  #   return render(request, 'pets-list.html', {'form': form})
+  def post(self, request, *args, **kwargs):
+    form = AppointmentForm(request.POST)
+    if form.is_valid():
+        article = form.save()
+        return HttpResponseRedirect(reverse_lazy('home'))
+    return render(request, 'calendar.html', {'form': form})
 
 
 class HomePage(CreateView):
