@@ -14,3 +14,12 @@ class Pet(models.Model):
 
     def __str__(self):
         return self.pet_name
+
+class Appointment(models.Model):
+    date_of_appointment = models.DateField()
+    duration_minutes = models.IntegerField()
+    special_instructions = models.CharField(max_length=100)
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.date_of_appointment
