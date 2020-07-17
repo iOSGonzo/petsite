@@ -1,22 +1,43 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.shortcuts import render
-from .models import Pet
+from .models import Pet, Appointment
+from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 
-# Create your views here.
-def home(request):
-    return render(request, 'home.html')
+from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 
-def pets_list(request):
-    context = {
-        'pets': Pet.objects.all()
-    }
-    return render(request, 'pets-list.html', context)
+from pet.forms import PetForm
+from pet.models import Pet
 
-def detail(request, pet_id):
-    context = {
-        'pet': Pet.objects.get(id=pet_id)
-    }
-    return render(request, 'detail.html', context)
+class PetsList(ListView):
+  def get(self, request, *args, **kwargs):
+      context = {'form': PetForm(), 'pets': Pet.objects.all()}
+      return render(request, 'pets-list.html', context)
+
+  def post(self, request, *args, **kwargs):
+    form = PetForm(request.POST)
+    if form.is_valid():
+        article = form.save()
+        return HttpResponseRedirect(reverse_lazy('home'))
+    return render(request, 'pets-list.html', {'form': form})
+
+
+class HomePage(CreateView):
+    def get(self, request):
+        """ GET a list of Articles. """
+        return render(request, 'home.html')
+
+class PetDetail(DetailView):
+
+  def get(self, request, pet_id):
+      context = {'pet': Pet.objects.get(id=pet_id)}
+      return render(request, 'detail.html', context)
+
+  # def post(self, request, *args, **kwargs):
+  #   form = PetForm(request.POST)
+  #   if form.is_valid():
+  #       article = form.save()
+  #       return HttpResponseRedirect(reverse_lazy('home'))
+  #   return render(request, 'pets-list.html', {'form': form})

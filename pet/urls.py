@@ -1,11 +1,12 @@
 from django.urls import path
 from . import views
+from pet.views import PetsList, PetDetail, HomePage
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('pets/', views.pets_list, name='pets-list'),
-    path('pets/<int:pet_id>/', views.detail, name='detail')
-
+    path('', HomePage.as_view(), name='home'),
+    # path('pets/', views.pets_list, name='pets-list'),
+    path('pets/<int:pet_id>/', PetDetail.as_view(), name='detail'),
+    path('pets/', PetsList.as_view(), name='pets-list')
     # path('w/<str:slug>/', ArticleDetailView.as_view(), name='wiki-details-page'),
     # path('create/', ArticleCreateView.as_view(), name='create'),
 ]

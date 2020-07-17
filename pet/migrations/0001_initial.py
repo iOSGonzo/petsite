@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             name='Pet',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('pet_name', models.CharField(max_length=100)),
+                ('name', models.CharField(max_length=100)),
                 ('species', models.CharField(max_length=100)),
                 ('breed', models.CharField(max_length=100)),
                 ('weight_in_pounds', models.IntegerField()),

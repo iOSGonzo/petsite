@@ -7,5 +7,9 @@
 <a>Breed: {{pet.breed}}</a>
 <br>
 <a>Weight: {{ pet.weight_in_pounds }}lbs </a>
+<br>
+{% for appointment in appointments %}
+<a>Appointment: {{ appointment.date_of_appointment }} </a>
+{% endfor %}
 
 <!-- /pet/{{ pet.id }} -->
