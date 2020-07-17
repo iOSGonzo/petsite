@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+
 {% block content %}
 {% if user.is_authenticated %}
 
@@ -5,7 +7,7 @@
   <ul>
     {% for appointment in appointments %}
       <li>
-        <a>{{ appointment.date_of_appointment }}</a>
+        <a>{{appointment.pet.pet_name}}: {{ appointment.date_of_appointment }} </a>
       </li>
     {% endfor %}
   </ul>
@@ -15,6 +17,6 @@
   {{ form.as_p }}
   <input type="submit" value="Submit">
   </form>
-  
+
 {% endif %}
 {% endblock %}

@@ -1,3 +1,6 @@
+
+{% extends 'base.html' %}
+
 {% block content %}
 {% if user.is_authenticated %}
 
@@ -13,7 +16,7 @@
   <form method="POST">
   {% csrf_token %}
   {{ form.as_p }}
-  <input type="submit" value="Submit">
+  <input type="submit" value="Add Pet">
   </form>
 
 {% endif %}

@@ -1,4 +1,6 @@
+{% extends 'base.html' %}
 
+{% block content %}
 <h1>{{pet.pet_name}} (Owned by: {{pet.owner}})</h1>
 
 
@@ -11,5 +13,5 @@
 {% for appointment in appointments %}
 <a>Appointment: {{ appointment.date_of_appointment }} </a>
 {% endfor %}
-
+{% endblock %}
 <!-- /pet/{{ pet.id }} -->

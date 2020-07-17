@@ -20,7 +20,7 @@ class PetsList(ListView):
     form = PetForm(request.POST)
     if form.is_valid():
         article = form.save()
-        return HttpResponseRedirect(reverse_lazy('home'))
+        return HttpResponseRedirect(reverse_lazy('pets-list'))
     return render(request, 'pets-list.html', {'form': form})
 
 class AppointmentList(ListView):
@@ -35,7 +35,7 @@ class AppointmentList(ListView):
     form = AppointmentForm(request.POST)
     if form.is_valid():
         article = form.save()
-        return HttpResponseRedirect(reverse_lazy('home'))
+        return HttpResponseRedirect(reverse_lazy('calendar'))
     return render(request, 'calendar.html', {'form': form})
 
 
