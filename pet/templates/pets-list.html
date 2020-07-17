@@ -1,15 +1,14 @@
 {% block content %}
-  <h1>All Pets</h1>
+{% if user.is_authenticated %}
 
-  <!-- <a href="{% url 'pets-list' %}">Pets List</a> -->
-  <!-- <hr>
-  {% if articles %}
-    <div class="card-columns">
-      {% for article in articles %}
-        {% include "partials/card.html" %}
-      {% endfor %}
-    </div>
-  {% else %}
-    <div class="alert alert-primary" role="alert">No pages to display.</div>
-  {% endif %} -->
+  <h1>All Pets</h1>
+  <ul>
+    {% for pet in pets %}
+      <li>
+        <a href="/pets/{{ pet.id }}">{{ pet.pet_name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endif %}
 {% endblock %}
